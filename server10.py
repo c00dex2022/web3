@@ -21,10 +21,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         # decode the base64 value
         decoded_value = base64.b64decode(b64_value).decode("utf-8")
 
-        # write the decoded value to a CSV file
+        # remove "/?i=" from the URL and write it to a CSV file
         with open("output1.csv", "a", newline="") as file:
             writer = csv.writer(file)
-            writer.writerow([decoded_value])
+            writer.writerow([url.replace("/?i=", ""), decoded_value])
 
         # send an empty response with a 200 status code
         self.send_response(200)
